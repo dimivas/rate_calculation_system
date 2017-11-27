@@ -2,12 +2,10 @@
 Validators
 """
 from argparse import ArgumentTypeError
+from configparser import ConfigParser
 
-_VALID_CSV_HEADER = ("Lender", "Rate", "Available")
-
-_MIN_AMOUNT = 1000
-_MAX_AMOUNT = 15000
-_AMOUNT_INCREMENT = 100
+_APP_CONFIG = ConfigParser()
+_APP_CONFIG.read('app_config/config.ini')
 
 
 def validate_header(header, delimiter):
@@ -18,10 +16,11 @@ def validate_header(header, delimiter):
     :param delimiter: the CSV's delimiter
     :raises Exception: in case the header is invalid
     """
-    if delimiter.join(header) != delimiter.join(_VALID_CSV_HEADER):
+    valid_csv_header = _APP_CONFIG['CSV']['ValidHeader'].split(',')
+    if delimiter.join(header) != delimiter.join(valid_csv_header):
 
         err_msg = "Invalid header of CSV file. Expecting: '{}'"\
-            .format(delimiter.join(_VALID_CSV_HEADER))
+            .format(delimiter.join(valid_csv_header))
 
         raise ValueError(err_msg)
 
@@ -33,17 +32,21 @@ def validate_loan_amount(value):
     :param value: the loan amount
     :raises ArgumentTypeError: in case the amoun is invalid
     """
+    min_amount = int(_APP_CONFIG['Amount']['Min'])
+    max_amount = int(_APP_CONFIG['Amount']['Max'])
+    amount_increment = int(_APP_CONFIG['Amount']['Increment'])
+
     err_msg = "The loan amount must be between {} and {} inclusive, with an increment of {}"
-    err_msg = err_msg.format(_MIN_AMOUNT, _MAX_AMOUNT, _AMOUNT_INCREMENT)
+    err_msg = err_msg.format(min_amount, max_amount, amount_increment)
 
     try:
         ivalue = int(value)
     except ValueError:
         raise ArgumentTypeError(err_msg)
 
-    if ivalue < _MIN_AMOUNT or \
-       ivalue > _MAX_AMOUNT or \
-       ivalue % _AMOUNT_INCREMENT != 0:
+    if ivalue < min_amount or \
+       ivalue > max_amount or \
+       ivalue % amount_increment != 0:
         raise ArgumentTypeError(err_msg)
     return ivalue
 
