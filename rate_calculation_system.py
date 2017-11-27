@@ -37,10 +37,10 @@ def _print_results(requested_amount, rate, monthly_repayment, \
     :param monthy_repayment: the monthly repayment amount
     :param total_repayment: the total repayment amount
     """
-    print("Requested amount: £{}".format(requested_amount))
+    print("Requested amount: GBP {}".format(requested_amount))
     print("Rate: {0:.1f}%".format(rate*100))
-    print("Monthly repayment: £{0:.2f}".format(monthly_repayment))
-    print("Total repayment: £{0:.2f}".format(total_repayment))
+    print("Monthly repayment: GBP {0:.2f}".format(monthly_repayment))
+    print("Total repayment: GBP {0:.2f}".format(total_repayment))
 
 
 def main():
