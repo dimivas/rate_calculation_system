@@ -30,12 +30,9 @@ class ValidateLendersAmountTestSuite(unittest.TestCase):
 
 class ValidateHeaderTestSuite(unittest.TestCase):
 
-    def test_valid_header_with_colon(self):
-        validate_header("Lender;Rate;Available", ";")
-
-    def test_valid_header_with_comma(self):
-        validate_header("Lender,Rate,Available", ",")
+    def test_valid_header(self):
+        validate_header(('Lender', 'Rate', 'Available'), ";")
 
     def test_invalid_header(self):
         with self.assertRaises(ValueError):
-            validate_header("Lender,Rate,Unknown,Available", ",")
+            validate_header(('Lender', 'Rate', 'Unknown', 'Available'), ",")
