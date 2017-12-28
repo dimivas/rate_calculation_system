@@ -77,14 +77,14 @@ def calculate_loan(market_data, requested_amount, duration):
     used_market[-1][1] -= cum_sum[target_idx] - requested_amount
 
     # Calculate the rate for each lender based on the contributed amount
-    contribution_rate = np.apply_along_axis(_calculate_contribution_rate, 1, \
+    contribution_rate = np.apply_along_axis(_calculate_contribution_rate, 1,
                                             used_market, requested_amount)
     rate = contribution_rate.sum()
 
-    monthly_repayment = _calculate_monthly_repayment(requested_amount, \
+    monthly_repayment = _calculate_monthly_repayment(requested_amount,
                                                      rate, duration)
 
-    total_repayment = _calculate_total_repayment(monthly_repayment, \
+    total_repayment = _calculate_total_repayment(monthly_repayment,
                                                  duration)
 
-    return (rate, monthly_repayment, total_repayment)
+    return rate, monthly_repayment, total_repayment

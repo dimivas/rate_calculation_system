@@ -27,14 +27,14 @@ def _get_args():
     return args
 
 
-def _print_results(requested_amount, rate, monthly_repayment, \
+def _print_results(requested_amount, rate, monthly_repayment,
                    total_repayment):
     """
     Prints final results
 
     :param requested_amount: the requested loan amount
     :param rate: the loan's rate
-    :param monthy_repayment: the monthly repayment amount
+    :param monthly_repayment: the monthly repayment amount
     :param total_repayment: the total repayment amount
     """
     print("Requested amount: GBP {}".format(requested_amount))
@@ -50,8 +50,8 @@ def main():
     args = _get_args()
     market_data = import_csv(args.market_file)
 
-    rate, monthly_repayment, total_repayment = calculate_loan(market_data,\
-                                                              args.loan_amount,\
+    rate, monthly_repayment, total_repayment = calculate_loan(market_data,
+                                                              args.loan_amount,
                                                               args.duration)
 
     _print_results(args.loan_amount, rate, monthly_repayment, total_repayment)

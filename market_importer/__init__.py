@@ -18,7 +18,7 @@ def _parse_row(lender, rate, available):
     :param available: lender's available amount
     :returns: list of UUID of the lender, rate and available amount
     """
-    norm_res = (map_lender_to_uuid(lender), float(rate), \
+    norm_res = (map_lender_to_uuid(lender), float(rate),
                 validate_lenders_amount(int(available)))
 
     return norm_res

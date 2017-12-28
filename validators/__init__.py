@@ -30,7 +30,7 @@ def validate_loan_amount(value):
     Loan amount validator
 
     :param value: the loan amount
-    :raises ArgumentTypeError: in case the amoun is invalid
+    :raises ArgumentTypeError: in case the amount is invalid
     """
     min_amount = int(_APP_CONFIG['Amount']['Min'])
     max_amount = int(_APP_CONFIG['Amount']['Max'])
