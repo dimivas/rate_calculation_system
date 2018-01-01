@@ -26,4 +26,8 @@ jobs:
           name: Test
           command: |
             . rcs/bin/activate
-            python -m unittest discover -s test -t test
+            coverage --source=. run -m unittest discover -s test
+      - run:
+          name: Code Coverage
+          command: |
+            bash <(curl -s https://codecov.io/bash) -t ${CODECOVIO_TOKEN}
