@@ -10,23 +10,21 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - rcs-{{ checksum "requirements.txt" }}-{{ .Branch }}
+          - rcs_novenv-{{ checksum "requirements.txt" }}-{{ .Branch }}
           # fallback to using the latest cache if no exact match is found
-          - rcs-
+          - rcs_noenv-
       - run:
           name: install dependencies
+
           command: |
-            python3 -m venv rcs
-            . rcs/bin/activate
             pip install -r requirements.txt
       - save_cache:
           paths:
-            - ./rcs
-          key: rcs-{{ checksum "requirements.txt" }}-{{ .Branch }}
+            - ./rcs_noenv
+          key: rcs_noenv-{{ checksum "requirements.txt" }}-{{ .Branch }}
       - run:
           name: Test
           command: |
-            . rcs/bin/activate
             coverage run --source=. -m unittest discover -s test
       - run:
           name: Code Coverage
