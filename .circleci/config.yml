@@ -2,30 +2,33 @@
 version: 2
 jobs:
   build:
-    working_directory: /app
     docker:
       - image: circleci/python:3.6.1
     working_directory: ~/rate_calculation_system
     steps:
       - checkout
-      #- restore_cache:
-      #    keys:
-      #    - rcs_novenv-{{ checksum "requirements.txt" }}-{{ .Branch }}
-      #    # fallback to using the latest cache if no exact match is found
-      #    - rcs_noenv-
+      - restore_cache:
+          keys:
+          - rcs-{{ checksum "requirements.txt" }}-{{ .Branch }}
+          # fallback to using the latest cache if no exact match is found
+          - rcs-
       - run:
           name: install dependencies
           command: |
+            python3 -m venv rcs
+            . rcs/bin/activate
             pip install -r requirements.txt
-      #- save_cache:
-      #    paths:
-      #      - ./rcs_noenv
-      #    key: rcs_noenv-{{ checksum "requirements.txt" }}-{{ .Branch }}
+      - save_cache:
+          paths:
+            - ./rcs
+          key: rcs-{{ checksum "requirements.txt" }}-{{ .Branch }}
       - run:
           name: Test
           command: |
+            . rcs/bin/activate
             coverage run --source=. -m unittest discover -s test
       - run:
           name: Code Coverage
           command: |
+            . rcs/bin/activate
             bash <(curl -s https://codecov.io/bash)
