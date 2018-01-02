@@ -8,19 +8,19 @@ jobs:
     working_directory: ~/rate_calculation_system
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - rcs_novenv-{{ checksum "requirements.txt" }}-{{ .Branch }}
-          # fallback to using the latest cache if no exact match is found
-          - rcs_noenv-
+      #- restore_cache:
+      #    keys:
+      #    - rcs_novenv-{{ checksum "requirements.txt" }}-{{ .Branch }}
+      #    # fallback to using the latest cache if no exact match is found
+      #    - rcs_noenv-
       - run:
           name: install dependencies
           command: |
-            pip3 install -r requirements.txt
-      - save_cache:
-          paths:
-            - ./rcs_noenv
-          key: rcs_noenv-{{ checksum "requirements.txt" }}-{{ .Branch }}
+            pip install -r requirements.txt
+      #- save_cache:
+      #    paths:
+      #      - ./rcs_noenv
+      #    key: rcs_noenv-{{ checksum "requirements.txt" }}-{{ .Branch }}
       - run:
           name: Test
           command: |
