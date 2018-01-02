@@ -16,5 +16,5 @@ class MarketImporterTestSuite(unittest.TestCase):
         self.assertIsInstance(res[2], int)
 
     def test_import_csv(self):
-        res = import_csv("../sample_market_data_files/test.csv")
+        res = import_csv("sample_market_data_files/test.csv")
         self.assertIsInstance(res, numpy.ndarray)
