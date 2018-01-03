@@ -1,6 +1,9 @@
 # Rate Calculation System
 
 [![CircleCI](https://circleci.com/gh/dimivas/rate_calculation_system/tree/master.svg?style=shield)](https://circleci.com/gh/dimivas/rate_calculation_system/tree/master)
+[![codecov](https://codecov.io/gh/dimivas/rate_calculation_system/branch/master/graph/badge.svg)](https://codecov.io/gh/dimivas/rate_calculation_system)
+
+
 
 ## Overview
 This application consists of three conceptual parts: parse arguments, import csv and calculate loan. The modules that implement the Rate Calculation system are the following:
