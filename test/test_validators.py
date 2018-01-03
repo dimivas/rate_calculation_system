@@ -17,6 +17,10 @@ class ValidateLoanAmountTestSuite(unittest.TestCase):
     def test_valid_amount(self):
         self.assertEqual(validate_loan_amount("10000"), 10000)
 
+    def test_invalid_amount(self):
+        with self.assertRaises(ArgumentTypeError):
+            validate_loan_amount("TEST")
+
 
 class ValidateLendersAmountTestSuite(unittest.TestCase):
 
