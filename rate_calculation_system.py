@@ -10,7 +10,7 @@ from market_importer import import_csv
 from loan_calculator import calculate_loan
 
 
-def _get_args():
+def _get_args(cli_params):
     """
     Get user arguments
 
@@ -22,7 +22,7 @@ def _get_args():
     parser.add_argument('duration', nargs='?', type=int, default=36,
                         help='the duration of the loan (default: %(default)s)')
 
-    args = parser.parse_args()
+    args = parser.parse_args(cli_params)
 
     return args
 
@@ -64,7 +64,7 @@ def main():
     """
     Main function
     """
-    args = _get_args()
+    args = _get_args(sys.argv[1:])
     market_data = import_csv(args.market_file)
 
     rate, monthly_repayment, total_repayment = calculate_loan(market_data,
