@@ -27,6 +27,25 @@ def _get_args():
     return args
 
 
+def _format_report(requested_amount, rate, monthly_repayment,
+                   total_repayment):
+    """
+    Format final report
+
+    :param requested_amount: the requested loan amount
+    :param rate: the loan's rate
+    :param monthly_repayment: the monthly repayment amount
+    :param total_repayment: the total repayment amount
+    :returns: a list with the text of the report
+    """
+    report = list()
+    report.append("Requested amount: GBP {}".format(requested_amount))
+    report.append("Rate: {0:.1f}%".format(rate*100))
+    report.append("Monthly repayment: GBP {0:.2f}".format(monthly_repayment))
+    report.append("Total repayment: GBP {0:.2f}".format(total_repayment))
+    return report
+
+
 def _print_results(requested_amount, rate, monthly_repayment,
                    total_repayment):
     """
@@ -37,10 +56,8 @@ def _print_results(requested_amount, rate, monthly_repayment,
     :param monthly_repayment: the monthly repayment amount
     :param total_repayment: the total repayment amount
     """
-    print("Requested amount: GBP {}".format(requested_amount))
-    print("Rate: {0:.1f}%".format(rate*100))
-    print("Monthly repayment: GBP {0:.2f}".format(monthly_repayment))
-    print("Total repayment: GBP {0:.2f}".format(total_repayment))
+    [print(x) for x in _format_report(requested_amount, rate,
+                                      monthly_repayment, total_repayment)]
 
 
 def main():
